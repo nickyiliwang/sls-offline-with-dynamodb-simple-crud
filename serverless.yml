@@ -3,6 +3,15 @@ service: simple_CRUB_DDB
 custom:
   settings:
     POSTS_TABLE: posts
+  dynamodb:
+      stages:
+          - dev
+      start:
+          port: 8000
+          inMemory: true
+          migrate: true
+      migration:
+          dir: offline/migrations
 
 provider:
   name: aws
@@ -77,3 +86,7 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.settings.POSTS_TABLE}
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline

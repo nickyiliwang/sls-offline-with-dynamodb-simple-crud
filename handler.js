@@ -1,6 +1,10 @@
 "use strict";
 const AWS = require("aws-sdk");
-const db = new AWS.DynamoDB.DocumentClient({ apiVersion: "2012-08-10" });
+
+const db = new AWS.DynamoDB.DocumentClient({
+  region: "localhost",
+  endpoint: "http://localhost:8000",
+});
 const { v4: uuid } = require("uuid");
 
 const postsTable = process.env.POSTS_TABLE;
